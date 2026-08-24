@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Advisors — Proposed Website Architecture Wireframe</title>
+<style>
+  :root{
+    --ink:#1e2329;
+    --muted:#6c747d;
+    --line:#cdd3d9;
+    --soft:#f4f6f7;
+    --soft2:#e9edf0;
+    --dark:#252b31;
+    --white:#fff;
+    --accent:#5f6f68;
+    --page:1920px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#dfe3e6;
+    color:var(--ink);
+  }
+  .presentation-bar{
+    width:min(100%, var(--page));
+    margin:0 auto;
+    background:#171b1f;
+    color:#fff;
+    padding:14px 44px;
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    align-items:center;
+    font-size:14px;
+    letter-spacing:.02em;
+  }
+  .presentation-bar strong{font-size:16px}
+  .presentation-bar .right{color:#c8cdd1;text-align:right}
+  .site{
+    width:min(100%, var(--page));
+    margin:0 auto 60px;
+    background:#fff;
+    box-shadow:0 20px 70px rgba(0,0,0,.14);
+  }
+  .section{
+    position:relative;
+    border-bottom:1px dashed #aeb6bd;
+    overflow:hidden;
+  }
+  .section-label{
+    position:absolute;
+    z-index:5;
+    top:18px;
+    left:22px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:#5f6870;
+    background:rgba(255,255,255,.92);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 11px;
+  }
+  .height-tag{
+    position:absolute;
+    z-index:5;
+    right:22px;
+    top:18px;
+    font-size:12px;
+    color:#5f6870;
+    background:rgba(255,255,255,.92);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 11px;
+  }
+  .container{
+    width:calc(100% - 240px);
+    max-width:1680px;
+    margin:0 auto;
+  }
+  h1,h2,h3,p{margin-top:0}
+  h1{font-size:70px;line-height:.98;letter-spacing:-.04em;margin-bottom:28px}
+  h2{font-size:48px;line-height:1.04;letter-spacing:-.025em;margin-bottom:22px}
+  h3{font-size:23px;line-height:1.15;margin-bottom:12px}
+  p{font-size:19px;line-height:1.5;color:#59616a}
+  .eyebrow{
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#6b737a;
+    margin-bottom:18px;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--dark);
+    color:#fff;
+    padding:17px 25px;
+    border-radius:3px;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .subnote{
+    margin-top:14px;
+    font-size:14px;
+    color:#7a8289;
+  }
+  .wire-icon{
+    width:60px;height:60px;
+    border:2px solid #76818a;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#68737c;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:22px;
+  }
+  .image-placeholder{
+    height:100%;
+    min-height:300px;
+    border:2px solid #aeb6bd;
+    background:
+      linear-gradient(135deg, transparent 49.6%, #c5cbd0 50%, transparent 50.4%),
+      linear-gradient(45deg, transparent 49.6%, #c5cbd0 50%, transparent 50.4%),
+      #eef1f3;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:30px;
+    color:#5e6870;
+    font-size:16px;
+    line-height:1.5;
+  }
+  .image-placeholder strong{display:block;color:#343c43;font-size:18px;margin-bottom:8px}
+  .nav{
+    height:118px;
+    display:grid;
+    grid-template-columns:280px 1fr auto;
+    align-items:center;
+    gap:36px;
+    padding:0 90px;
+  }
+  .logo{
+    width:230px;height:58px;
+    border:2px solid #727d85;
+    display:grid;place-items:center;
+    font-weight:700;letter-spacing:.08em;
+  }
+  .navlinks{
+    display:flex;gap:34px;justify-content:flex-end;
+    font-size:15px;color:#465059;
+  }
+  .hero{height:880px;background:#fafbfb}
+  .hero .container{
+    height:100%;
+    display:grid;
+    grid-template-columns:1.02fr .98fr;
+    gap:95px;
+    align-items:center;
+    padding-top:48px;
+  }
+  .hero p{max-width:660px;font-size:22px}
+  .hero .image-placeholder{height:640px}
+  .problem{height:640px}
+  .problem .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .center{text-align:center}
+  .problem h2{max-width:950px;margin-left:auto;margin-right:auto}
+  .three-col{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:54px;margin-top:54px;text-align:left;
+  }
+  .three-col p{font-size:16px}
+  .lifeline{height:820px;background:var(--soft)}
+  .lifeline .container{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .lifeline h2{font-size:60px}
+  .steps{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#cbd1d6;margin:45px 0 38px}
+  .step{background:#fff;padding:44px 38px;min-height:245px}
+  .step .num{font-size:14px;letter-spacing:.14em;color:#75808a;margin-bottom:22px}
+  .how{height:650px}
+  .how .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .four-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:50px}
+  .flow-item{position:relative;padding-right:25px}
+  .flow-item:not(:last-child):after{
+    content:"→";position:absolute;right:-10px;top:18px;color:#929ba3;font-size:30px
+  }
+  .difference{height:1080px;background:#f3f5f4}
+  .difference .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .difference .lead{max-width:900px}
+  .difference-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:48px}
+  .diff-card{background:#fff;border:1px solid #d4d9dd;padding:38px;min-height:260px}
+  .diff-card p{font-size:17px}
+  .multiple{height:760px}
+  .multiple .container{height:100%;display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+  .diagram{
+    border:1px solid #cbd1d6;background:#fafbfb;padding:48px;min-height:470px;
+    display:flex;flex-direction:column;justify-content:center
+  }
+  .dia-row{display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;margin:13px 0}
+  .dia-box{border:1px solid #adb6bd;padding:18px;text-align:center;background:#fff;font-weight:700}
+  .dia-arrow{text-align:center;color:#7a858e;font-size:24px}
+  .tim{height:820px;background:#f8f9fa}
+  .tim .container{height:100%;display:grid;grid-template-columns:.95fr 1.05fr;gap:90px;align-items:center}
+  .tim .image-placeholder{height:610px}
+  .after{height:780px;position:relative;background:#e9edef}
+  .after-bg{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(90deg, rgba(28,34,39,.82) 0%, rgba(28,34,39,.62) 44%, rgba(28,34,39,.10) 75%),
+      repeating-linear-gradient(135deg,#c9d0d4 0,#c9d0d4 10px,#d5dade 10px,#d5dade 20px);
+  }
+  .after .container{position:relative;z-index:2;height:100%;display:flex;align-items:center}
+  .after-copy{max-width:730px;color:#fff}
+  .after-copy h2,.after-copy p{color:#fff}
+  .after-copy p{font-size:20px;color:#eef1f2}
+  .proof{height:760px}
+  .proof .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+  .quote{border:1px solid #d3d8dc;padding:34px;min-height:250px}
+  .quote p{font-size:16px}
+  .statstrip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;background:#eef1f3}
+  .stat{padding:25px;text-align:center;border-right:1px solid #d0d6da}
+  .stat:last-child{border-right:0}
+  .resource{height:720px;background:#f7f8f8}
+  .resource .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+  .article{background:#fff;border:1px solid #d6dbdf}
+  .article-img{height:160px;background:#e1e5e8;border-bottom:1px solid #d6dbdf;display:grid;place-items:center;color:#69737b}
+  .article-copy{padding:26px}
+  .cta{height:520px;background:#252b31;color:#fff}
+  .cta .container{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .cta h2{font-size:58px;max-width:950px;color:#fff}
+  .cta p{color:#d8dde0;max-width:850px}
+  .cta .btn{background:#fff;color:#1f252a}
+  .footer{height:520px;background:#171c20;color:#fff}
+  .footer .container{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:55px}
+  .footer h3{font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:#fff}
+  .footer p,.footer li{font-size:14px;color:#aeb6bc;line-height:1.8}
+  .footer ul{list-style:none;padding:0;margin:0}
+  .legal{border-top:1px solid #343b41;margin-top:55px;padding-top:24px;font-size:12px;color:#8e989f}
+  .campaigns{background:#dde2e5;padding:70px 0}
+  .campaigns .container{width:calc(100% - 180px)}
+  .campaigns h2{font-size:38px}
+  .campaign-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  .landing{background:#fff;border:1px solid #bbc3c9;padding:34px}
+  .landing .mini{display:grid;gap:10px}
+  .mini div{border:1px solid #d7dcdf;background:#f8f9fa;padding:16px;font-size:13px;color:#586169}
+  .note{
+    background:#fff7dc;border:1px solid #e6d7a1;padding:18px 22px;font-size:14px;line-height:1.55;color:#625a3b;margin-top:28px
+  }
+  .legend{
+    width:min(100%, var(--page));margin:0 auto;background:#fff;padding:34px 90px 45px;
+    border-top:1px solid #ccd2d7;
+  }
+  .legend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .legend-item{font-size:13px;color:#626c74}
+  .legend-swatch{width:42px;height:24px;border:1px solid #adb6bd;margin-bottom:8px}
+  .sw1{background:#fff}.sw2{background:#f4f6f7}.sw3{background:#252b31}.sw4{background:#e1e5e8}
+  @media(max-width:1100px){
+    h1{font-size:52px} h2{font-size:38px}
+    .container{width:calc(100% - 80px)}
+    .nav{padding:0 40px;grid-template-columns:220px 1fr}.navlinks{display:none}
+    .hero,.problem,.lifeline,.how,.difference,.multiple,.tim,.after,.proof,.resource,.cta,.footer{height:auto;min-height:0}
+    .hero .container,.multiple .container,.tim .container{grid-template-columns:1fr;padding:120px 0 80px}
+    .hero .image-placeholder,.tim .image-placeholder{height:420px}
+    .problem .container,.lifeline .container,.how .container,.difference .container,.proof .container,.resource .container,.cta .container,.footer .container{padding:110px 0 80px}
+    .three-col,.difference-grid,.quotes,.articles,.footer-grid,.campaign-grid{grid-template-columns:1fr}
+    .four-flow{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    .container{width:calc(100% - 36px)}
+    .presentation-bar{padding:12px 18px;display:block}
+    .presentation-bar .right{text-align:left;margin-top:6px}
+    .nav{padding:0 18px;height:90px}.logo{width:190px;height:48px}
+    h1{font-size:42px}.hero p{font-size:18px}h2{font-size:34px}
+    .three-col,.four-flow{grid-template-columns:1fr}
+    .flow-item:not(:last-child):after{display:none}
+    .section-label,.height-tag{font-size:10px;top:10px}
+    .section-label{left:10px}.height-tag{right:10px}
+    .campaigns .container{width:calc(100% - 36px)}
+    .legend{padding:30px 18px}.legend-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="presentation-bar">
+    <strong>LIFE ADVISORS — Proposed Website Architecture / Desktop Wireframe</strong>
+    <div class="right">Design reference width: 1920px &nbsp;•&nbsp; Approx. homepage length: 8,870px + navigation</div>
+  </div>
+
+  <main class="site">
+    <section class="section nav">
+      <div class="logo">NEW LIFE ADVISORS LOGO</div>
+      <div class="navlinks">
+        <span>MCA Solutions</span><span>Why Life Advisors</span><span>Resources</span><span>About</span>
+      </div>
+      <span class="btn">Talk With a Life Advisor</span>
+    </section>
+
+    <section class="section hero">
+      <div class="section-label">01 — Hero / Brand Positioning</div>
+      <div class="height-tag">~880 px</div>
+      <div class="container">
+        <div>
+          <div class="eyebrow">Business Financial Advocacy</div>
+          <h1>When Short-Term Financing Becomes a Long-Term Problem.</h1>
+          <p>Life Advisors helps business owners understand their options, regain control and work toward a healthier financial future.</p>
+          <span class="btn">Talk With a Life Advisor</span>
+          <div class="subnote">Confidential • Business-Focused • No Obligation</div>
+        </div>
+        <div class="image-placeholder">
+          <div><strong>PRIMARY HERO IMAGE / VIDEO</strong>
+          Sophisticated environmental portrait of an established business owner.<br>
+          Real business setting: office, restaurant, warehouse, professional workspace.<br><br>
+          Avoid stereotypical “debt distress” imagery.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem">
+      <div class="section-label">02 — Problem Recognition</div>
+      <div class="height-tag">~640 px</div>
+      <div class="container center">
+        <div class="eyebrow">Recognize the Cycle</div>
+        <h2>An MCA may have solved yesterday’s problem. What happens when the payments become today’s problem?</h2>
+        <div class="three-col">
+          <div><div class="wire-icon">ICON</div><h3>Daily / Weekly Payments</h3><p>High-frequency payments can tighten operating cash flow and reduce flexibility.</p></div>
+          <div><div class="wire-icon">ICON</div><h3>Multiple MCAs</h3><p>One obligation can become several, creating a more complicated financial picture.</p></div>
+          <div><div class="wire-icon">ICON</div><h3>Another Advance?</h3><p>What feels like the next solution may compound the underlying problem.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section lifeline">
+      <div class="section-label">03 — The MCA Lifeline™</div>
+      <div class="height-tag">~820 px</div>
+      <div class="container">
+        <div class="eyebrow">Primary Solution Platform</div>
+        <h2>The MCA Lifeline™</h2>
+        <p style="max-width:760px">When your business needs room to breathe, start by understanding the entire situation and building a coordinated path forward.</p>
+        <div class="steps">
+          <div class="step"><div class="num">01</div><div class="wire-icon" style="margin:0 auto 20px">ICON</div><h3>Understand</h3><p>Review the business, obligations and immediate pressure points.</p></div>
+          <div class="step"><div class="num">02</div><div class="wire-icon" style="margin:0 auto 20px">ICON</div><h3>Develop a Strategy</h3><p>Build a business-focused approach around the full financial picture.</p></div>
+          <div class="step"><div class="num">03</div><div class="wire-icon" style="margin:0 auto 20px">ICON</div><h3>Work Toward Resolution</h3><p>Move toward greater control and a more sustainable financial position.</p></div>
+        </div>
+        <span class="btn">Explore the MCA Lifeline</span>
+      </div>
+    </section>
+
+    <section class="section how">
+      <div class="section-label">04 — How Life Advisors Works</div>
+      <div class="height-tag">~650 px</div>
+      <div class="container">
+        <div class="eyebrow">Simple, Consultative Process</div>
+        <h2>A clear process. A business-first conversation.</h2>
+        <div class="four-flow">
+          <div class="flow-item"><div class="wire-icon">01</div><h3>Listen</h3><p>Understand the business and the immediate challenge.</p></div>
+          <div class="flow-item"><div class="wire-icon">02</div><h3>Assess</h3><p>Review current obligations and possible paths forward.</p></div>
+          <div class="flow-item"><div class="wire-icon">03</div><h3>Strategize</h3><p>Develop a coordinated plan rather than a one-size-fits-all answer.</p></div>
+          <div class="flow-item"><div class="wire-icon">04</div><h3>Advocate</h3><p>Work toward resolution while keeping the broader business in view.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section difference">
+      <div class="section-label">05 — The Life Advisors MCA Difference</div>
+      <div class="height-tag">~1,080 px</div>
+      <div class="container">
+        <div class="eyebrow">Why Life Advisors</div>
+        <h2 class="lead">Not all MCA resolution companies work the same way.</h2>
+        <p class="lead">This becomes the primary proof architecture for the brand: why a business owner should trust Life Advisors after an ad or referral earns their attention.</p>
+        <div class="difference-grid">
+          <div class="diff-card"><div class="wire-icon">ICON</div><h3>Business First</h3><p>A consultative approach designed to understand the business—not simply its obligations.</p></div>
+          <div class="diff-card"><div class="wire-icon">ICON</div><h3>Thinking Beyond Today</h3><p>Resolution should be part of a larger path toward a healthier financial future.</p></div>
+          <div class="diff-card"><div class="wire-icon">ICON</div><h3>Working From Day One</h3><p>Reserved for substantiated wording about how client funds begin working toward resolution. Final claim language to be verified with Life Advisors.</p></div>
+          <div class="diff-card"><div class="wire-icon">ICON</div><h3>The Whole Picture</h3><p>When multiple MCAs are involved, the strategy should account for the broader situation rather than leaving previous obligations behind.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section multiple">
+      <div class="section-label">06 — Multiple MCA Education / Proof</div>
+      <div class="height-tag">~760 px</div>
+      <div class="container">
+        <div>
+          <div class="eyebrow">Complexity Requires Coordination</div>
+          <h2>Multiple MCAs Require Looking at the Whole Picture.</h2>
+          <p>Use this section to visually explain how stacked obligations affect business cash flow and why a coordinated strategy matters.</p>
+          <p><strong>Visual treatment:</strong> custom financial-flow illustration, not stock photography.</p>
+        </div>
+        <div class="diagram">
+          <div class="dia-row"><div class="dia-box">MCA #1</div><div class="dia-arrow">→</div><div class="dia-box">BUSINESS CASH FLOW</div></div>
+          <div class="dia-row"><div class="dia-box">MCA #2</div><div class="dia-arrow">→</div><div class="dia-box">PRESSURE / CONSTRAINT</div></div>
+          <div class="dia-row"><div class="dia-box">MCA #3</div><div class="dia-arrow">→</div><div class="dia-box">LIFE ADVISORS</div></div>
+          <div class="dia-row"><div class="dia-box">FULL PICTURE</div><div class="dia-arrow">→</div><div class="dia-box">COORDINATED STRATEGY</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tim">
+      <div class="section-label">07 — Timothy Shaw / Authority</div>
+      <div class="height-tag">~820 px</div>
+      <div class="container">
+        <div class="image-placeholder"><div><strong>NEW PROFESSIONAL PORTRAIT OF TIM</strong>
+        Environmental portrait with quiet confidence.<br>
+        Office / financial / business context.<br><br>
+        Also capture vertical video and alternate stills during same session.</div></div>
+        <div>
+          <div class="eyebrow">Meet Timothy Shaw — Managing Partner</div>
+          <h2>From Banking to Business Advocacy.</h2>
+          <p>Brief, credible story about Tim’s financial background, why he understands business owners, lenders and the MCA marketplace, and why Life Advisors takes a consultative approach.</p>
+          <span class="btn">Meet Tim</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section after">
+      <div class="section-label">08 — Life After Debt / Future State</div>
+      <div class="height-tag">~780 px</div>
+      <div class="after-bg"></div>
+      <div class="container">
+        <div class="after-copy">
+          <div class="eyebrow" style="color:#d9dee1">Future-State Brand Territory</div>
+          <h2>Resolution Isn’t the Finish Line. What Does Life After Debt Look Like?</h2>
+          <p>Less pressure. Improved cash flow. Better financial decisions. A business positioned to move forward.</p>
+          <p><strong>Background image:</strong> aspirational but authentic operating-business environment. Show progress, not wealth clichés.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof">
+      <div class="section-label">09 — Social Proof / Trust</div>
+      <div class="height-tag">~760 px</div>
+      <div class="container">
+        <div class="eyebrow">Verified Results Only</div>
+        <h2>Business Owners We’ve Helped Move Forward.</h2>
+        <div class="quotes">
+          <div class="quote"><h3>Client Story / Testimonial</h3><p>Two to four sentences. Ideally includes business type, challenge and what changed—without overpromising.</p></div>
+          <div class="quote"><h3>Client Story / Testimonial</h3><p>Reserve for a strong, verifiable testimonial or video testimonial preview.</p></div>
+          <div class="quote"><h3>Client Story / Testimonial</h3><p>Use real name/business only with permission. Otherwise clearly designate approved attribution.</p></div>
+        </div>
+        <div class="statstrip">
+          <div class="stat"><strong>VERIFIED STAT</strong><br><small>Businesses Assisted</small></div>
+          <div class="stat"><strong>VERIFIED STAT</strong><br><small>Obligations Addressed</small></div>
+          <div class="stat"><strong>VERIFIED STAT</strong><br><small>Client Rating / Other Proof</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section resource">
+      <div class="section-label">10 — Education / Resources</div>
+      <div class="height-tag">~720 px</div>
+      <div class="container">
+        <div class="eyebrow">Education Builds Trust</div>
+        <h2>Before You Take Another MCA…</h2>
+        <p style="max-width:820px">A content platform for SEO/AEO, Tim’s videos, Meta creative, retargeting, email nurture and future thought leadership.</p>
+        <div class="articles">
+          <div class="article"><div class="article-img">EDITORIAL IMAGE / GRAPHIC</div><div class="article-copy"><h3>5 Questions to Ask Before Taking Another MCA</h3><p>Article + video + short-form social derivative.</p></div></div>
+          <div class="article"><div class="article-img">EDITORIAL IMAGE / GRAPHIC</div><div class="article-copy"><h3>What Happens When a Business Has Multiple MCAs?</h3><p>Educational visual + Tim explainer video.</p></div></div>
+          <div class="article"><div class="article-img">EDITORIAL IMAGE / GRAPHIC</div><div class="article-copy"><h3>MCA vs. Traditional Business Financing</h3><p>Simple comparison content designed for search and social.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="section-label" style="background:#31383e;color:#dfe4e7;border-color:#4b545b">11 — Final Consultation CTA</div>
+      <div class="height-tag" style="background:#31383e;color:#dfe4e7;border-color:#4b545b">~520 px</div>
+      <div class="container">
+        <div class="eyebrow" style="color:#adb5bb">Confidential Conversation</div>
+        <h2>You Built a Business. Let’s Talk About Protecting What’s Next.</h2>
+        <p>Talk with a Life Advisor about your current situation and better understand the options available to your business.</p>
+        <span class="btn">Talk With a Life Advisor</span>
+      </div>
+    </section>
+
+    <section class="section footer">
+      <div class="section-label" style="background:#252b31;color:#cfd5d9;border-color:#3d464d">12 — Footer / Legal / Navigation</div>
+      <div class="height-tag" style="background:#252b31;color:#cfd5d9;border-color:#3d464d">~520 px</div>
+      <div class="container">
+        <div class="footer-grid">
+          <div><div class="logo" style="border-color:#59646c;color:#fff;margin-bottom:22px">LIFE ADVISORS</div><p>Business financial advocacy for companies navigating MCA pressure and seeking a path forward.</p></div>
+          <div><h3>MCA Solutions</h3><ul><li>The MCA Lifeline</li><li>Multiple MCAs</li><li>How It Works</li></ul></div>
+          <div><h3>Learn</h3><ul><li>Resources</li><li>Videos</li><li>FAQs</li><li>Before You Take Another MCA</li></ul></div>
+          <div><h3>Company</h3><ul><li>About</li><li>Timothy Shaw</li><li>Contact</li><li>Privacy</li><li>Terms</li></ul></div>
+        </div>
+        <div class="legal">Required disclosures, privacy, terms, contact information and any legally reviewed MCA-related disclaimers.</div>
+      </div>
+    </section>
+
+    <section class="campaigns">
+      <div class="container">
+        <div class="eyebrow">Paid Media Architecture — Separate From Main Website Navigation</div>
+        <h2>Meta Campaign Landing Pages</h2>
+        <div class="campaign-grid">
+          <div class="landing">
+            <h3>Landing Page 01 — The MCA Lifeline™</h3>
+            <p>High-intent campaign. Designed to convert owners already feeling MCA payment pressure.</p>
+            <div class="mini">
+              <div>1. Campaign-specific hero + consultation CTA</div>
+              <div>2. “Does this sound familiar?” pain recognition</div>
+              <div>3. MCA Lifeline 3-step solution</div>
+              <div>4. Life Advisors Difference / proof</div>
+              <div>5. Tim authority + trust</div>
+              <div>6. Short qualification form / consultation</div>
+            </div>
+          </div>
+          <div class="landing">
+            <h3>Landing Page 02 — Before You Take Another MCA…</h3>
+            <p>Education-first campaign. Interrupts the reflex to stack another advance and creates a lower-pressure lead path.</p>
+            <div class="mini">
+              <div>1. Strong interruption headline + Tim video</div>
+              <div>2. 5 questions / educational checklist</div>
+              <div>3. Cost / stacking / cash-flow education</div>
+              <div>4. Alternatives / “understand your options”</div>
+              <div>5. Life Advisors Difference</div>
+              <div>6. Confidential consultation CTA</div>
+            </div>
+          </div>
+        </div>
+        <div class="note"><strong>Strategic note:</strong> Paid Meta traffic should land on campaign-specific pages so creative, messaging, qualification and conversion can be measured independently. The main website has the broader job of establishing brand credibility, education, differentiation and trust.</div>
+      </div>
+    </section>
+  </main>
+
+  <section class="legend">
+    <div class="eyebrow">Wireframe Legend</div>
+    <div class="legend-grid">
+      <div class="legend-item"><div class="legend-swatch sw1"></div><strong>White</strong><br>Primary spacious editorial sections</div>
+      <div class="legend-item"><div class="legend-swatch sw2"></div><strong>Light neutral</strong><br>Section change / emphasis</div>
+      <div class="legend-item"><div class="legend-swatch sw3"></div><strong>Dark field</strong><br>Conversion / trust emphasis</div>
+      <div class="legend-item"><div class="legend-swatch sw4"></div><strong>Image placeholder</strong><br>Photography, video or custom illustration</div>
+    </div>
+  </section>
+</body>
+</html>
