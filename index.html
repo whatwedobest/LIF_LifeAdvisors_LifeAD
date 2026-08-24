@@ -29,13 +29,24 @@
     margin:0 auto;
     background:#171b1f;
     color:#fff;
-    padding:14px 44px;
+    padding:10px 44px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:14px;
+    letter-spacing:.02em;
+  }
+  .presentation-bar .disclaimer{
+    font-size:11px;
+    line-height:1.4;
+    color:#8b949b;
+    letter-spacing:.03em;
+  }
+  .presentation-bar-row{
     display:flex;
     justify-content:space-between;
     gap:24px;
     align-items:center;
-    font-size:14px;
-    letter-spacing:.02em;
   }
   .presentation-bar strong{font-size:16px}
   .presentation-bar .right{color:#c8cdd1;text-align:right}
@@ -275,7 +286,8 @@
   }
   @media(max-width:640px){
     .container{width:calc(100% - 36px)}
-    .presentation-bar{padding:12px 18px;display:block}
+    .presentation-bar{padding:12px 18px}
+    .presentation-bar-row{display:block}
     .presentation-bar .right{text-align:left;margin-top:6px}
     .nav{padding:0 18px;height:90px}.logo{width:190px;height:48px}
     h1{font-size:42px}.hero p{font-size:18px}h2{font-size:34px}
@@ -290,8 +302,11 @@
 </head>
 <body>
   <div class="presentation-bar">
-    <strong>LIFE ADVISORS — Proposed Website Architecture / Desktop Wireframe</strong>
-    <div class="right">Design reference width: 1920px &nbsp;•&nbsp; Approx. homepage length: 8,870px + navigation</div>
+    <div class="disclaimer">©2026 wwdb integrated marketing corp. All rights reserved.</div>
+    <div class="presentation-bar-row">
+      <strong>LIFE ADVISORS — Proposed Website Architecture / Desktop Wireframe</strong>
+      <div class="right">Design reference width: 1920px &nbsp;•&nbsp; Approx. homepage length: 8,870px + navigation</div>
+    </div>
   </div>
 
   <main class="site">
