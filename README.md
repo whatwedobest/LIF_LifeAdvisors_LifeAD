@@ -48,3 +48,17 @@ python3 -m http.server 8080
 ```
 
 Then visit http://localhost:8080
+
+## Responsive behavior
+
+The wireframe is optimized for all common screen sizes:
+
+| Breakpoint | Layout behavior |
+|---|---|
+| **1600px+** | Max content width capped for comfortable reading on ultra-wide displays |
+| **901–1200px** | Two-column grids where appropriate; footer and sitemap reflow |
+| **≤900px** | Slide-out navigation menu; single-column sections; stacked stats |
+| **≤768px** | Full-width CTAs; centered mobile typography |
+| **≤480px** | Compact spacing; single-column footer and process steps |
+
+Mobile navigation uses a hamburger menu with overlay, escape-to-close, and 48px minimum touch targets.
