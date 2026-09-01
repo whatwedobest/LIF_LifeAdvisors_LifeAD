@@ -167,17 +167,51 @@
     display:flex;gap:34px;justify-content:flex-end;
     font-size:15px;color:#465059;
   }
-  .hero{height:880px;background:#fafbfb}
-  .hero .container{
+  .hero{height:880px;background:#fafbfb;position:relative}
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .hero-bg .image-placeholder{
     height:100%;
-    display:grid;
-    grid-template-columns:1.02fr .98fr;
-    gap:95px;
+    min-height:0;
+    border:0;
+    place-items:end;
+    padding:40px 48px;
+  }
+  .hero-image-note{
+    position:absolute;
+    z-index:3;
+    right:40px;
+    bottom:36px;
+    max-width:380px;
+    text-align:right;
+    background:rgba(255,255,255,.9);
+    border:1px solid var(--line);
+    padding:16px 18px;
+    font-size:13px;
+    line-height:1.45;
+    color:#5e6870;
+  }
+  .hero-image-note strong{display:block;color:#343c43;font-size:14px;margin-bottom:6px}
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(90deg, rgba(250,251,251,.94) 0%, rgba(250,251,251,.78) 36%, rgba(250,251,251,.28) 68%, rgba(250,251,251,.08) 100%);
+    pointer-events:none;
+  }
+  .hero .container{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
     align-items:center;
     padding-top:48px;
   }
+  .hero-copy{max-width:720px;text-align:left}
   .hero p{max-width:660px;font-size:22px}
-  .hero .image-placeholder{height:640px}
   .problem{height:640px}
   .problem .container{height:100%;display:flex;flex-direction:column;justify-content:center}
   .center{text-align:center}
@@ -277,8 +311,14 @@
     .container{width:calc(100% - 80px)}
     .nav{padding:0 40px;grid-template-columns:220px 1fr}.navlinks{display:none}
     .hero,.problem,.lifeline,.how,.difference,.multiple,.tim,.after,.proof,.resource,.cta,.footer{height:auto;min-height:0}
-    .hero .container,.multiple .container,.tim .container{grid-template-columns:1fr;padding:120px 0 80px}
-    .hero .image-placeholder,.tim .image-placeholder{height:420px}
+    .hero{min-height:640px}
+    .hero .container{padding:120px 0 200px}
+    .hero-overlay{
+      background:linear-gradient(180deg, rgba(250,251,251,.94) 0%, rgba(250,251,251,.82) 52%, rgba(250,251,251,.35) 100%);
+    }
+    .hero-image-note{left:40px;right:40px;max-width:none;text-align:center}
+    .multiple .container,.tim .container{grid-template-columns:1fr;padding:120px 0 80px}
+    .tim .image-placeholder{height:420px}
     .problem .container,.lifeline .container,.how .container,.difference .container,.proof .container,.resource .container,.cta .container,.footer .container{padding:110px 0 80px}
     .three-col,.difference-grid,.quotes,.articles,.footer-grid,.campaign-grid{grid-template-columns:1fr}
     .four-flow{grid-template-columns:1fr 1fr}
@@ -321,19 +361,23 @@
     <section class="section hero">
       <div class="section-label">01 — Hero / Brand Positioning</div>
       <div class="height-tag">~880 px</div>
+      <div class="hero-bg">
+        <div class="image-placeholder"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-image-note">
+        <strong>PRIMARY HERO IMAGE / VIDEO</strong>
+        Sophisticated environmental portrait of an established business owner.
+        Real business setting: office, restaurant, warehouse, professional workspace.
+        Avoid stereotypical “debt distress” imagery.
+      </div>
       <div class="container">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow">Business Financial Advocacy</div>
           <h1>When Short-Term Financing Becomes a Long-Term Problem.</h1>
           <p>Life Advisors helps business owners understand their options, regain control and work toward a healthier financial future.</p>
           <span class="btn">Talk With a Life Advisor</span>
           <div class="subnote">Confidential • Business-Focused • No Obligation</div>
-        </div>
-        <div class="image-placeholder">
-          <div><strong>PRIMARY HERO IMAGE / VIDEO</strong>
-          Sophisticated environmental portrait of an established business owner.<br>
-          Real business setting: office, restaurant, warehouse, professional workspace.<br><br>
-          Avoid stereotypical “debt distress” imagery.</div>
         </div>
       </div>
     </section>
