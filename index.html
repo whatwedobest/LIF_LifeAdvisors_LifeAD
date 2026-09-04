@@ -284,15 +284,59 @@
   .nav-overlay{
     display:none;
   }
-  .hero{min-height:min(720px, auto);background:#fafbfb;padding:var(--section-pad) 0}
+  .hero{
+    position:relative;
+    min-height:clamp(560px, 72vw, 720px);
+    background:#fafbfb;
+    padding:var(--section-pad) 0;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .hero-bg .image-placeholder{
+    height:100%;
+    min-height:0;
+    border:0;
+    border-radius:0;
+  }
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(90deg, rgba(250,251,251,.96) 0%, rgba(250,251,251,.86) 34%, rgba(250,251,251,.42) 62%, rgba(250,251,251,.12) 100%);
+    pointer-events:none;
+  }
+  .hero-image-note{
+    position:absolute;
+    z-index:3;
+    right:clamp(16px,3vw,40px);
+    bottom:clamp(16px,3vw,36px);
+    max-width:min(380px, calc(100% - 32px));
+    text-align:right;
+    background:rgba(255,255,255,.92);
+    border:1px solid var(--line);
+    padding:14px 16px;
+    font-size:12px;
+    line-height:1.45;
+    color:#5e6870;
+  }
+  .hero-image-note strong{display:block;color:#343c43;font-size:13px;margin-bottom:6px}
   .hero .container{
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:clamp(32px,6vw,80px);
+    position:relative;
+    z-index:2;
+    width:calc(100% - var(--container-inset));
+    max-width:1680px;
+    margin:0 auto;
+    display:flex;
     align-items:center;
   }
+  .hero-copy{max-width:720px;text-align:left}
   .hero p{max-width:600px;font-size:clamp(1.05rem,.5vw + .95rem,1.25rem)}
-  .hero .image-placeholder{height:clamp(280px,42vw,520px)}
   .problem{padding:var(--section-pad) 0}
   .problem .container{display:flex;flex-direction:column;justify-content:center}
   .center{text-align:center}
@@ -469,9 +513,34 @@
       display:block;
       width:100%;
     }
-    .hero .container,
     .tim .container{grid-template-columns:1fr}
-    .hero .image-placeholder{order:-1;height:clamp(240px,50vw,380px)}
+    .hero{
+      min-height:clamp(520px, 120vw, 680px);
+      align-items:flex-end;
+      padding:calc(var(--section-pad) + 28px) 0 var(--section-pad);
+    }
+    .hero-overlay{
+      background:linear-gradient(180deg, rgba(250,251,251,.35) 0%, rgba(250,251,251,.72) 38%, rgba(250,251,251,.94) 68%, rgba(250,251,251,.98) 100%);
+    }
+    .hero .section-label,
+    .hero .height-tag{
+      position:absolute;
+      z-index:4;
+      display:block;
+      margin:0;
+    }
+    .hero .section-label{top:18px;left:22px}
+    .hero .height-tag{top:18px;right:22px}
+    .hero-image-note{
+      top:58px;
+      bottom:auto;
+      right:clamp(12px,3vw,24px);
+      left:auto;
+      max-width:min(280px, 55vw);
+      text-align:left;
+      font-size:11px;
+    }
+    .hero-copy{max-width:100%}
     .three-col{grid-template-columns:1fr}
     .three-col > div{padding:8px 0;border-bottom:1px solid #e4e8eb}
     .three-col > div:last-child{border-bottom:0}
@@ -488,7 +557,7 @@
       margin:12px 10px 0;
     }
     .section{padding-top:8px}
-    .hero,.problem,.lifeline,.how,.why-preview,.proof,.tim,.resource-preview,.cta,.footer{padding-top:calc(var(--section-pad) + 8px)}
+    .problem,.lifeline,.how,.why-preview,.proof,.tim,.resource-preview,.cta,.footer{padding-top:calc(var(--section-pad) + 8px)}
     .nav .section-label{display:none}
   }
 
@@ -568,18 +637,21 @@
     <section class="section hero">
       <div class="section-label">01 — Hero</div>
       <div class="height-tag">~720 px</div>
+      <div class="hero-bg" aria-hidden="true">
+        <div class="image-placeholder"></div>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-image-note">
+        <strong>PRIMARY HERO IMAGE / VIDEO</strong>
+        Environmental portrait of an established business owner in a real business setting. Avoid stereotypical “debt distress” imagery.
+      </div>
       <div class="container">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow">Business Financial Advocacy</div>
           <h1>When Short-Term Financing Becomes a Long-Term Problem.</h1>
           <p>Life Advisors helps business owners understand their options, regain control and work toward a healthier financial future.</p>
           <span class="btn">Talk With a Life Advisor</span>
           <div class="subnote">Confidential • Business-Focused • No Obligation</div>
-        </div>
-        <div class="image-placeholder">
-          <div><strong>PRIMARY HERO IMAGE / VIDEO</strong>
-          Environmental portrait of an established business owner in a real business setting.<br>
-          Avoid stereotypical “debt distress” imagery.</div>
         </div>
       </div>
     </section>
