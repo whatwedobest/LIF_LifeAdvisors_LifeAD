@@ -287,7 +287,7 @@
   .hero{
     position:relative;
     min-height:clamp(560px, 72vw, 720px);
-    background:#fafbfb;
+    background:#dfe4e8;
     padding:var(--section-pad) 0;
     display:flex;
     align-items:center;
@@ -303,37 +303,55 @@
     min-height:0;
     border:0;
     border-radius:0;
+    /* Dense full-bleed wireframe image field — visible edge-to-edge behind copy */
+    background-color:#cfd5da;
+    background-image:
+      linear-gradient(135deg, transparent 48%, #8f99a1 48%, #8f99a1 52%, transparent 52%),
+      linear-gradient(45deg, transparent 48%, #8f99a1 48%, #8f99a1 52%, transparent 52%);
+    background-size:120px 120px;
   }
   .hero-overlay{
     position:absolute;
     inset:0;
     z-index:1;
-    background:linear-gradient(90deg, rgba(250,251,251,.96) 0%, rgba(250,251,251,.86) 34%, rgba(250,251,251,.42) 62%, rgba(250,251,251,.12) 100%);
+    /* Light scrim so copy stays readable while image field remains visible behind text */
+    background:linear-gradient(90deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.48) 45%, rgba(255,255,255,.12) 75%, rgba(255,255,255,0) 100%);
     pointer-events:none;
   }
   .hero-image-note{
-    position:absolute;
-    z-index:3;
-    right:clamp(16px,3vw,40px);
-    bottom:clamp(16px,3vw,36px);
-    max-width:min(380px, calc(100% - 32px));
-    text-align:right;
-    background:rgba(255,255,255,.92);
+    margin-top:20px;
+    max-width:360px;
+    text-align:left;
+    background:rgba(255,255,255,.88);
     border:1px solid var(--line);
-    padding:14px 16px;
+    padding:12px 14px;
     font-size:12px;
     line-height:1.45;
     color:#5e6870;
   }
   .hero-image-note strong{display:block;color:#343c43;font-size:13px;margin-bottom:6px}
+  @media(min-width:901px){
+    .hero-image-note{
+      position:absolute;
+      z-index:3;
+      right:clamp(16px,3vw,40px);
+      bottom:clamp(16px,3vw,36px);
+      margin-top:0;
+      max-width:min(360px, calc(100% - 32px));
+    }
+  }
   .hero .container{
     position:relative;
     z-index:2;
     width:calc(100% - var(--container-inset));
     max-width:1680px;
     margin:0 auto;
+    align-self:stretch;
     display:flex;
-    align-items:center;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    min-height:inherit;
   }
   .hero-copy{max-width:720px;text-align:left}
   .hero p{max-width:600px;font-size:clamp(1.05rem,.5vw + .95rem,1.25rem)}
@@ -515,12 +533,12 @@
     }
     .tim .container{grid-template-columns:1fr}
     .hero{
-      min-height:clamp(520px, 120vw, 680px);
+      min-height:clamp(560px, 145vw, 720px);
       align-items:flex-end;
-      padding:calc(var(--section-pad) + 28px) 0 var(--section-pad);
+      padding:calc(var(--section-pad) + 36px) 0 calc(var(--section-pad) + 12px);
     }
     .hero-overlay{
-      background:linear-gradient(180deg, rgba(250,251,251,.35) 0%, rgba(250,251,251,.72) 38%, rgba(250,251,251,.94) 68%, rgba(250,251,251,.98) 100%);
+      background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.28) 35%, rgba(255,255,255,.72) 68%, rgba(255,255,255,.88) 100%);
     }
     .hero .section-label,
     .hero .height-tag{
@@ -529,18 +547,16 @@
       display:block;
       margin:0;
     }
-    .hero .section-label{top:18px;left:22px}
-    .hero .height-tag{top:18px;right:22px}
+    .hero .section-label{top:18px;left:16px}
+    .hero .height-tag{top:18px;right:16px}
     .hero-image-note{
-      top:58px;
-      bottom:auto;
-      right:clamp(12px,3vw,24px);
-      left:auto;
-      max-width:min(280px, 55vw);
-      text-align:left;
+      max-width:100%;
       font-size:11px;
     }
     .hero-copy{max-width:100%}
+    .hero .container{
+      align-items:stretch;
+    }
     .three-col{grid-template-columns:1fr}
     .three-col > div{padding:8px 0;border-bottom:1px solid #e4e8eb}
     .three-col > div:last-child{border-bottom:0}
@@ -641,10 +657,6 @@
         <div class="image-placeholder"></div>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
-      <div class="hero-image-note">
-        <strong>PRIMARY HERO IMAGE / VIDEO</strong>
-        Environmental portrait of an established business owner in a real business setting. Avoid stereotypical “debt distress” imagery.
-      </div>
       <div class="container">
         <div class="hero-copy">
           <div class="eyebrow">Business Financial Advocacy</div>
@@ -652,6 +664,10 @@
           <p>Life Advisors helps business owners understand their options, regain control and work toward a healthier financial future.</p>
           <span class="btn">Talk With a Life Advisor</span>
           <div class="subnote">Confidential • Business-Focused • No Obligation</div>
+        </div>
+        <div class="hero-image-note">
+          <strong>PRIMARY HERO IMAGE / VIDEO</strong>
+          Environmental portrait of an established business owner in a real business setting. Avoid stereotypical “debt distress” imagery. Full-bleed behind headline on all screen sizes.
         </div>
       </div>
     </section>
